@@ -4,9 +4,9 @@
 #
 Name     : sox
 Version  : 14.4.2
-Release  : 1
-URL      : https://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.bz2
-Source0  : https://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.bz2
+Release  : 2
+URL      : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
+Source0  : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
 Summary  : Audio file format and effects library
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
@@ -73,12 +73,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1510691609
+export SOURCE_DATE_EPOCH=1517338205
 %configure --disable-static --with-png \
 --with-pulseaudio \
 --with-oggvorbis \
 --with-flac
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %check
 export LANG=C
@@ -88,7 +88,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1510691609
+export SOURCE_DATE_EPOCH=1517338205
 rm -rf %{buildroot}
 %make_install
 
