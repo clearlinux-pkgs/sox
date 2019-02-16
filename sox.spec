@@ -4,23 +4,28 @@
 #
 Name     : sox
 Version  : 14.4.2
-Release  : 4
+Release  : 5
 URL      : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
 Source0  : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
 Summary  : Audio file format and effects library
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
-Requires: sox-bin
-Requires: sox-lib
-Requires: sox-doc
+Requires: sox-bin = %{version}-%{release}
+Requires: sox-lib = %{version}-%{release}
+Requires: sox-license = %{version}-%{release}
+Requires: sox-man = %{version}-%{release}
 BuildRequires : alsa-lib-dev
-BuildRequires : cmake
+BuildRequires : buildreq-cmake
 BuildRequires : libsndfile-dev
 BuildRequires : pkgconfig(flac)
 BuildRequires : pkgconfig(libpng)
 BuildRequires : pkgconfig(libpulse)
 BuildRequires : pkgconfig(opusfile)
 BuildRequires : pkgconfig(vorbis)
+Patch1: CVE-2019-8354.patch
+Patch2: CVE-2019-8355.patch
+Patch3: CVE-2019-8356.patch
+Patch4: CVE-2019-8357.patch
 
 %description
 SoX: Sound eXchange
@@ -33,6 +38,8 @@ analysis and providing input to more capable analysis and plotting tools.
 %package bin
 Summary: bin components for the sox package.
 Group: Binaries
+Requires: sox-license = %{version}-%{release}
+Requires: sox-man = %{version}-%{release}
 
 %description bin
 bin components for the sox package.
@@ -41,39 +48,56 @@ bin components for the sox package.
 %package dev
 Summary: dev components for the sox package.
 Group: Development
-Requires: sox-lib
-Requires: sox-bin
-Provides: sox-devel
+Requires: sox-lib = %{version}-%{release}
+Requires: sox-bin = %{version}-%{release}
+Provides: sox-devel = %{version}-%{release}
 
 %description dev
 dev components for the sox package.
 
 
-%package doc
-Summary: doc components for the sox package.
-Group: Documentation
-
-%description doc
-doc components for the sox package.
-
-
 %package lib
 Summary: lib components for the sox package.
 Group: Libraries
+Requires: sox-license = %{version}-%{release}
 
 %description lib
 lib components for the sox package.
 
 
+%package license
+Summary: license components for the sox package.
+Group: Default
+
+%description license
+license components for the sox package.
+
+
+%package man
+Summary: man components for the sox package.
+Group: Default
+
+%description man
+man components for the sox package.
+
+
 %prep
 %setup -q -n sox-14.4.2
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1517338205
+export SOURCE_DATE_EPOCH=1550279589
+export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static --with-png \
 --with-pulseaudio \
 --with-oggvorbis \
@@ -88,8 +112,12 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1517338205
+export SOURCE_DATE_EPOCH=1550279589
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/sox
+cp COPYING %{buildroot}/usr/share/package-licenses/sox/COPYING
+cp LICENSE.GPL %{buildroot}/usr/share/package-licenses/sox/LICENSE.GPL
+cp LICENSE.LGPL %{buildroot}/usr/share/package-licenses/sox/LICENSE.LGPL
 %make_install
 
 %files
@@ -107,14 +135,24 @@ rm -rf %{buildroot}
 /usr/include/*.h
 /usr/lib64/libsox.so
 /usr/lib64/pkgconfig/sox.pc
-
-%files doc
-%defattr(-,root,root,-)
-%doc /usr/share/man/man1/*
-%doc /usr/share/man/man3/*
-%doc /usr/share/man/man7/*
+/usr/share/man/man3/libsox.3
 
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libsox.so.3
 /usr/lib64/libsox.so.3.0.0
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/sox/COPYING
+/usr/share/package-licenses/sox/LICENSE.GPL
+/usr/share/package-licenses/sox/LICENSE.LGPL
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/play.1
+/usr/share/man/man1/rec.1
+/usr/share/man/man1/sox.1
+/usr/share/man/man1/soxi.1
+/usr/share/man/man7/soxeffect.7
+/usr/share/man/man7/soxformat.7

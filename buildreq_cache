@@ -1,0 +1,4 @@
+14.4.2
+alsa-lib-dev
+libsndfile-dev
+pkgconfig(libpng)
