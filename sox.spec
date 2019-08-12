@@ -4,7 +4,7 @@
 #
 Name     : sox
 Version  : 14.4.2
-Release  : 6
+Release  : 7
 URL      : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
 Source0  : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
 Summary  : Audio file format and effects library
@@ -22,10 +22,18 @@ BuildRequires : pkgconfig(libpng)
 BuildRequires : pkgconfig(libpulse)
 BuildRequires : pkgconfig(opusfile)
 BuildRequires : pkgconfig(vorbis)
-Patch1: CVE-2019-8354.patch
-Patch2: CVE-2019-8355.patch
-Patch3: CVE-2019-8356.patch
-Patch4: CVE-2019-8357.patch
+Patch1: CVE-2017-11332.patch
+Patch2: CVE-2017-11358.patch
+Patch3: CVE-2017-11359.patch
+Patch4: CVE-2017-15370.patch
+Patch5: CVE-2017-15371.patch
+Patch6: CVE-2017-15372.patch
+Patch7: CVE-2017-15642.patch
+Patch8: CVE-2017-18189.patch
+Patch9: CVE-2019-8354.patch
+Patch10: CVE-2019-8355.patch
+Patch11: CVE-2019-8356.patch
+Patch12: CVE-2019-8357.patch
 
 %description
 SoX: Sound eXchange
@@ -39,7 +47,6 @@ analysis and providing input to more capable analysis and plotting tools.
 Summary: bin components for the sox package.
 Group: Binaries
 Requires: sox-license = %{version}-%{release}
-Requires: sox-man = %{version}-%{release}
 
 %description bin
 bin components for the sox package.
@@ -51,6 +58,7 @@ Group: Development
 Requires: sox-lib = %{version}-%{release}
 Requires: sox-bin = %{version}-%{release}
 Provides: sox-devel = %{version}-%{release}
+Requires: sox = %{version}-%{release}
 
 %description dev
 dev components for the sox package.
@@ -87,17 +95,26 @@ man components for the sox package.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1550279589
-export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1565640149
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static --with-png \
 --with-pulseaudio \
 --with-oggvorbis \
@@ -105,14 +122,14 @@ export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=use
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1550279589
+export SOURCE_DATE_EPOCH=1565640149
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sox
 cp COPYING %{buildroot}/usr/share/package-licenses/sox/COPYING
