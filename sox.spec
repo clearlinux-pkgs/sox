@@ -4,7 +4,7 @@
 #
 Name     : sox
 Version  : 14.4.2
-Release  : 7
+Release  : 8
 URL      : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
 Source0  : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
 Summary  : Audio file format and effects library
@@ -16,6 +16,7 @@ Requires: sox-license = %{version}-%{release}
 Requires: sox-man = %{version}-%{release}
 BuildRequires : alsa-lib-dev
 BuildRequires : buildreq-cmake
+BuildRequires : file-dev
 BuildRequires : libsndfile-dev
 BuildRequires : pkgconfig(flac)
 BuildRequires : pkgconfig(libpng)
@@ -34,6 +35,7 @@ Patch9: CVE-2019-8354.patch
 Patch10: CVE-2019-8355.patch
 Patch11: CVE-2019-8356.patch
 Patch12: CVE-2019-8357.patch
+Patch13: CVE-2019-13590.patch
 
 %description
 SoX: Sound eXchange
@@ -91,6 +93,7 @@ man components for the sox package.
 
 %prep
 %setup -q -n sox-14.4.2
+cd %{_builddir}/sox-14.4.2
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -103,13 +106,14 @@ man components for the sox package.
 %patch10 -p1
 %patch11 -p1
 %patch12 -p1
+%patch13 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1565640149
+export SOURCE_DATE_EPOCH=1581017222
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -129,12 +133,12 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1565640149
+export SOURCE_DATE_EPOCH=1581017222
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sox
-cp COPYING %{buildroot}/usr/share/package-licenses/sox/COPYING
-cp LICENSE.GPL %{buildroot}/usr/share/package-licenses/sox/LICENSE.GPL
-cp LICENSE.LGPL %{buildroot}/usr/share/package-licenses/sox/LICENSE.LGPL
+cp %{_builddir}/sox-14.4.2/COPYING %{buildroot}/usr/share/package-licenses/sox/80e5c5a14b56473afb672af36c556e8416cf93a0
+cp %{_builddir}/sox-14.4.2/LICENSE.GPL %{buildroot}/usr/share/package-licenses/sox/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
+cp %{_builddir}/sox-14.4.2/LICENSE.LGPL %{buildroot}/usr/share/package-licenses/sox/caeb68c46fa36651acf592771d09de7937926bb3
 %make_install
 
 %files
@@ -149,7 +153,7 @@ cp LICENSE.LGPL %{buildroot}/usr/share/package-licenses/sox/LICENSE.LGPL
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/*.h
+/usr/include/sox.h
 /usr/lib64/libsox.so
 /usr/lib64/pkgconfig/sox.pc
 /usr/share/man/man3/libsox.3
@@ -161,9 +165,9 @@ cp LICENSE.LGPL %{buildroot}/usr/share/package-licenses/sox/LICENSE.LGPL
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/sox/COPYING
-/usr/share/package-licenses/sox/LICENSE.GPL
-/usr/share/package-licenses/sox/LICENSE.LGPL
+/usr/share/package-licenses/sox/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
+/usr/share/package-licenses/sox/80e5c5a14b56473afb672af36c556e8416cf93a0
+/usr/share/package-licenses/sox/caeb68c46fa36651acf592771d09de7937926bb3
 
 %files man
 %defattr(0644,root,root,0755)
