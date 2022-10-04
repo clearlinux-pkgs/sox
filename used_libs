@@ -1,4 +1,4 @@
-libFLAC.so.8
+libFLAC.so.12
 libasound.so.2
 libc.so.6
 libgcc_s.so.1
@@ -9,7 +9,6 @@ libmagic.so.1
 libogg.so.0
 libopusfile.so.0
 libpng16.so.16
-libpthread.so.0
 libpulse-simple.so.0
 libpulse.so.0
 libsndfile.so.1

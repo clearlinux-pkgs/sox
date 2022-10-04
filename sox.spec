@@ -4,7 +4,7 @@
 #
 Name     : sox
 Version  : 14.4.2
-Release  : 12
+Release  : 13
 URL      : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
 Source0  : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
 Summary  : Audio file format and effects library
@@ -113,11 +113,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1581017222
+export SOURCE_DATE_EPOCH=1664907175
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
+export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
+export FFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 %configure --disable-static --with-png \
 --with-pulseaudio \
@@ -130,15 +130,15 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1581017222
+export SOURCE_DATE_EPOCH=1664907175
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sox
-cp %{_builddir}/sox-14.4.2/COPYING %{buildroot}/usr/share/package-licenses/sox/80e5c5a14b56473afb672af36c556e8416cf93a0
-cp %{_builddir}/sox-14.4.2/LICENSE.GPL %{buildroot}/usr/share/package-licenses/sox/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
-cp %{_builddir}/sox-14.4.2/LICENSE.LGPL %{buildroot}/usr/share/package-licenses/sox/caeb68c46fa36651acf592771d09de7937926bb3
+cp %{_builddir}/sox-%{version}/COPYING %{buildroot}/usr/share/package-licenses/sox/80e5c5a14b56473afb672af36c556e8416cf93a0 || :
+cp %{_builddir}/sox-%{version}/LICENSE.GPL %{buildroot}/usr/share/package-licenses/sox/06877624ea5c77efe3b7e39b0f909eda6e25a4ec || :
+cp %{_builddir}/sox-%{version}/LICENSE.LGPL %{buildroot}/usr/share/package-licenses/sox/caeb68c46fa36651acf592771d09de7937926bb3 || :
 %make_install
 
 %files

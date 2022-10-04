@@ -1,67 +1,67 @@
-Configure miss: whether stack-smashing protection is buggy
-Configure miss: libpng/png.h usability
-Configure miss: libpng/png.h presence
-Configure miss: libpng/png.h
-Configure miss: mad.h usability
-Configure miss: mad.h presence
-Configure miss: mad.h
-Configure miss: whether to dlopen mad
-Configure miss: mad_stream_buffer in -lmad
-Configure miss: id3tag.h usability
-Configure miss: id3tag.h presence
-Configure miss: id3tag.h
-Configure miss: whether to dlopen lame
-Configure miss: lame/lame.h usability
-Configure miss: lame/lame.h presence
-Configure miss: lame/lame.h
-Configure miss: lame.h usability
-Configure miss: lame.h presence
-Configure miss: lame.h
-Configure miss: lame_get_lametag_frame in -lmp3lame
-Configure miss: id3tag_set_fieldvalue in -lmp3lame
-Configure miss: twolame.h usability
-Configure miss: twolame.h presence
-Configure miss: twolame.h
-Configure miss: whether to dlopen twolame
-Configure miss: twolame_init in -ltwolame
-Configure miss: gsm/gsm.h usability
-Configure miss: gsm/gsm.h presence
-Configure miss: gsm/gsm.h
-Configure miss: gsm.h usability
-Configure miss: gsm.h presence
-Configure miss: gsm.h
-Configure miss: gsm_create in -lgsm
-Configure miss: lpc10.h usability
-Configure miss: lpc10.h presence
-Configure miss: lpc10.h
-Configure miss: create_lpc10_encoder_state in -llpc10
-Configure miss: opencore-amrwb/dec_if.h usability
-Configure miss: opencore-amrwb/dec_if.h presence
-Configure miss: opencore-amrwb/dec_if.h
-Configure miss: amrwb/dec.h usability
-Configure miss: amrwb/dec.h presence
-Configure miss: amrwb/dec.h
-Configure miss: opencore-amrnb/interf_dec.h usability
-Configure miss: opencore-amrnb/interf_dec.h presence
-Configure miss: opencore-amrnb/interf_dec.h
-Configure miss: amrnb/sp_dec.h usability
-Configure miss: amrnb/sp_dec.h presence
-Configure miss: amrnb/sp_dec.h
-Configure miss: wavpack/wavpack.h usability
-Configure miss: wavpack/wavpack.h presence
-Configure miss: wavpack/wavpack.h
-Configure miss: sndio.h usability
-Configure miss: sndio.h presence
-Configure miss: sndio.h
-Configure miss: CoreAudio/CoreAudio.h usability
-Configure miss: CoreAudio/CoreAudio.h presence
 Configure miss: CoreAudio/CoreAudio.h
-Configure miss: ao/ao.h usability
-Configure miss: ao/ao.h presence
+Configure miss: CoreAudio/CoreAudio.h presence
+Configure miss: CoreAudio/CoreAudio.h usability
+Configure miss: amrnb/sp_dec.h
+Configure miss: amrnb/sp_dec.h presence
+Configure miss: amrnb/sp_dec.h usability
+Configure miss: amrwb/dec.h
+Configure miss: amrwb/dec.h presence
+Configure miss: amrwb/dec.h usability
 Configure miss: ao/ao.h
+Configure miss: ao/ao.h presence
+Configure miss: ao/ao.h usability
+Configure miss: create_lpc10_encoder_state in -llpc10
+Configure miss: gsm.h
+Configure miss: gsm.h presence
+Configure miss: gsm.h usability
+Configure miss: gsm/gsm.h
+Configure miss: gsm/gsm.h presence
+Configure miss: gsm/gsm.h usability
+Configure miss: gsm_create in -lgsm
+Configure miss: id3tag.h
+Configure miss: id3tag.h presence
+Configure miss: id3tag.h usability
+Configure miss: id3tag_set_fieldvalue in -lmp3lame
+Configure miss: lame.h
+Configure miss: lame.h presence
+Configure miss: lame.h usability
+Configure miss: lame/lame.h
+Configure miss: lame/lame.h presence
+Configure miss: lame/lame.h usability
+Configure miss: lame_get_lametag_frame in -lmp3lame
+Configure miss: libpng/png.h
+Configure miss: libpng/png.h presence
+Configure miss: libpng/png.h usability
+Configure miss: lpc10.h
+Configure miss: lpc10.h presence
+Configure miss: lpc10.h usability
+Configure miss: mad.h
+Configure miss: mad.h presence
+Configure miss: mad.h usability
+Configure miss: mad_stream_buffer in -lmad
 Configure miss: mmsystem.h
-Configure miss: sys/audioio.h usability
-Configure miss: sys/audioio.h
-Configure miss: sun/audioio.h usability
-Configure miss: sun/audioio.h presence
+Configure miss: opencore-amrnb/interf_dec.h
+Configure miss: opencore-amrnb/interf_dec.h presence
+Configure miss: opencore-amrnb/interf_dec.h usability
+Configure miss: opencore-amrwb/dec_if.h
+Configure miss: opencore-amrwb/dec_if.h presence
+Configure miss: opencore-amrwb/dec_if.h usability
+Configure miss: sndio.h
+Configure miss: sndio.h presence
+Configure miss: sndio.h usability
 Configure miss: sun/audioio.h
+Configure miss: sun/audioio.h presence
+Configure miss: sun/audioio.h usability
+Configure miss: sys/audioio.h
+Configure miss: sys/audioio.h usability
+Configure miss: twolame.h
+Configure miss: twolame.h presence
+Configure miss: twolame.h usability
+Configure miss: twolame_init in -ltwolame
+Configure miss: wavpack/wavpack.h
+Configure miss: wavpack/wavpack.h presence
+Configure miss: wavpack/wavpack.h usability
+Configure miss: whether stack-smashing protection is buggy
+Configure miss: whether to dlopen lame
+Configure miss: whether to dlopen mad
+Configure miss: whether to dlopen twolame
