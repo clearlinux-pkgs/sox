@@ -4,7 +4,7 @@
 #
 Name     : sox
 Version  : 14.4.2
-Release  : 15
+Release  : 16
 URL      : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
 Source0  : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
 Summary  : Audio file format and effects library
