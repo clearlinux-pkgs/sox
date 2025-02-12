@@ -4,12 +4,14 @@ libsox.so.3:lsx_debug_impl
 libsox.so.3:lsx_debug_more_impl
 libsox.so.3:lsx_debug_most_impl
 libsox.so.3:lsx_eof
+libsox.so.3:lsx_error
 libsox.so.3:lsx_fail_errno
 libsox.so.3:lsx_fail_impl
 libsox.so.3:lsx_filelength
 libsox.so.3:lsx_find_enum_text
 libsox.so.3:lsx_find_enum_value
 libsox.so.3:lsx_find_file_extension
+libsox.so.3:lsx_flush
 libsox.so.3:lsx_getopt
 libsox.so.3:lsx_getopt_init
 libsox.so.3:lsx_lpc10_create_decoder_state
@@ -23,6 +25,7 @@ libsox.so.3:lsx_read_b_buf
 libsox.so.3:lsx_readbuf
 libsox.so.3:lsx_readchars
 libsox.so.3:lsx_realloc
+libsox.so.3:lsx_realloc_array
 libsox.so.3:lsx_report_impl
 libsox.so.3:lsx_rewind
 libsox.so.3:lsx_seeki

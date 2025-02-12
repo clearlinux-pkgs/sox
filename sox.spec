@@ -7,7 +7,7 @@
 #
 Name     : sox
 Version  : 14.4.2
-Release  : 22
+Release  : 23
 URL      : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
 Source0  : https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2.tar.bz2
 Summary  : Audio file format and effects library
@@ -19,6 +19,7 @@ Requires: sox-license = %{version}-%{release}
 Requires: sox-man = %{version}-%{release}
 BuildRequires : alsa-lib-dev
 BuildRequires : buildreq-configure
+BuildRequires : file
 BuildRequires : file-dev
 BuildRequires : libsndfile-dev
 BuildRequires : pkgconfig(flac)
@@ -29,18 +30,30 @@ BuildRequires : pkgconfig(vorbis)
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
-Patch1: CVE-2017-11332.patch
-Patch2: CVE-2017-11358.patch
-Patch3: CVE-2017-11359.patch
-Patch4: CVE-2017-15370.patch
-Patch5: CVE-2017-15371.patch
-Patch6: CVE-2017-15372.patch
-Patch7: CVE-2017-15642.patch
-Patch8: CVE-2017-18189.patch
-Patch9: CVE-2019-8354.patch
-Patch10: CVE-2019-8356.patch
-Patch11: CVE-2019-8357.patch
+Patch1: 0001-fix-build.patch
+Patch2: 0002-xa-validate-channel-count.patch
+Patch3: 0003-Handle-vorbis_analysis_headerout-errors.patch
+Patch4: 0004-fix-resource-leak-comments.patch
+Patch5: CVE-2017-11332.patch
+Patch6: CVE-2017-11358.patch
+Patch7: CVE-2017-11359.patch
+Patch8: CVE-2017-15370.patch
+Patch9: CVE-2017-15371.patch
+Patch10: CVE-2017-15372.patch
+Patch11: CVE-2017-15642.patch
 Patch12: CVE-2019-13590.patch
+Patch13: CVE-2019-8354.patch
+Patch14: CVE-2019-8355.patch
+Patch15: CVE-2019-8356.patch
+Patch16: CVE-2019-8357.patch
+Patch17: CVE-2021-23159.patch
+Patch18: CVE-2021-33844.patch
+Patch19: CVE-2021-3643.patch
+Patch20: CVE-2021-40426.patch
+Patch21: CVE-2022-31650.patch
+Patch22: CVE-2022-31651.patch
+Patch23: 0005-fix-resource-leak-hcom.patch
+Patch24: 0006-fix-hcom-big-endian.patch
 
 %description
 SoX: Sound eXchange
@@ -111,6 +124,18 @@ cd %{_builddir}/sox-14.4.2
 %patch -P 10 -p1
 %patch -P 11 -p1
 %patch -P 12 -p1
+%patch -P 13 -p1
+%patch -P 14 -p1
+%patch -P 15 -p1
+%patch -P 16 -p1
+%patch -P 17 -p1
+%patch -P 18 -p1
+%patch -P 19 -p1
+%patch -P 20 -p1
+%patch -P 21 -p1
+%patch -P 22 -p1
+%patch -P 23 -p1
+%patch -P 24 -p1
 pushd ..
 cp -a sox-14.4.2 buildavx2
 popd
@@ -120,7 +145,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1739391726
+export SOURCE_DATE_EPOCH=1739393200
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -133,12 +158,11 @@ FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 export GOAMD64=v2
-%configure --disable-static --with-png \
+%reconfigure --disable-static --with-png \
 --with-pulseaudio \
 --with-oggvorbis \
 --with-flac
 make  %{?_smp_mflags}
-
 unset PKG_CONFIG_PATH
 pushd ../buildavx2/
 GOAMD64=v3
@@ -147,12 +171,13 @@ CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -march=x86-64-v3 "
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS -march=x86-64-v3 "
-%configure --disable-static --with-png \
+%reconfigure --disable-static --with-png \
 --with-pulseaudio \
 --with-oggvorbis \
 --with-flac
 make  %{?_smp_mflags}
 popd
+
 %check
 export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
@@ -174,7 +199,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1739391726
+export SOURCE_DATE_EPOCH=1739393200
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/sox
 cp %{_builddir}/sox-%{version}/COPYING %{buildroot}/usr/share/package-licenses/sox/80e5c5a14b56473afb672af36c556e8416cf93a0 || :

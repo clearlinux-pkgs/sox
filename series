@@ -1,3 +1,7 @@
+0001-fix-build.patch
+0002-xa-validate-channel-count.patch
+0003-Handle-vorbis_analysis_headerout-errors.patch
+0004-fix-resource-leak-comments.patch
 CVE-2017-11332.patch
 CVE-2017-11358.patch
 CVE-2017-11359.patch
@@ -5,9 +9,16 @@ CVE-2017-15370.patch
 CVE-2017-15371.patch
 CVE-2017-15372.patch
 CVE-2017-15642.patch
-CVE-2017-18189.patch
+CVE-2019-13590.patch
 CVE-2019-8354.patch
-#CVE-2019-8355.patch
+CVE-2019-8355.patch
 CVE-2019-8356.patch
 CVE-2019-8357.patch
-CVE-2019-13590.patch
+CVE-2021-23159.patch
+CVE-2021-33844.patch
+CVE-2021-3643.patch
+CVE-2021-40426.patch
+CVE-2022-31650.patch
+CVE-2022-31651.patch
+0005-fix-resource-leak-hcom.patch
+0006-fix-hcom-big-endian.patch
